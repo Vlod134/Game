@@ -2,7 +2,7 @@ from tkinter import *
 from random import randrange as rnd, choice
 import time
 root = Tk()
-root.geometry('800x600')
+root.geometry('800x800')
 
 canv = Canvas(root,bg='white')
 canv.pack(fill=BOTH,expand=1)
@@ -12,6 +12,7 @@ p=0
 vsego=0
 velocity = [[0,0] for i in range (0,5)]
 clicked = [0,0,0,0,0]
+
 def new_ball():
    clicked = [0,0,0,0,0]
    global now,vsego,velocity,clicked
@@ -36,6 +37,11 @@ def balls_movement():
 		y=a[i][1]
 		r=a[i][2]
 		canv.create_oval(x-r,y-r,x+r,y+r,fill = 'white', width=0)
+		if ((x-r)<0 or (x+r)>800):
+			velocity[i][0]*=-1
+		if ((y-r)<0 or (y+r)>800):
+			velocity[i][1]*=-1
+			
 		a[i][0]=a[i][0]+velocity[i][0]
 		a[i][1]=a[i][1]+velocity[i][1]
 		x=a[i][0]
